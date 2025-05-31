@@ -7,7 +7,7 @@
   <title>{{ $title }}</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
-  <link href="{{ url('company-profile/img/favicon.png')}} " rel="icon">
+  <link href="{{ url('company-profile/img/favicon.ico')}} " rel="icon">
   <link href="{{ url('company-profile/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -22,25 +22,21 @@
 <body class="index-page">
     <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container position-relative d-flex align-items-center justify-content-between">
-
       <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
-        <h1 class="sitename">Swarakyat Nusantara</h1>
+        <img src="{{ url('company-profile/img/logo.png') }}" alt="Logo" style="width: 40px; margin-right: 10px;">
+        <h1 class="sitename mb-0" style="font-size: 1.5rem;">Swarakyat Nusantara</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="/#home" class="active">Home</a></li>
           <li><a href="#about">Tentang Kami</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="/portofolio">Portfolio</a></li>
           <li class="dropdown"><a href="#"><span>Layanan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="/services/wifi">Pemasangan Wifi</a></li>
-              <li><a href="/services/cctv">Pemasangan CCTV</a></li>
-              <li><a href="/services/cctv">Maintenance Atau Pemasangan Kabel FO Atau LAN</a></li>
-              <li><a href="/services/cashier">Pengadaan Kasir dan Sistem Pembayaran</a></li>
-              <li><a href="/services/dev">Pembuatan Website dan Mobil App</a></li>
-              <li><a href="/services/software">Pembuatan Software Pendukung</a></li>
-              <li><a href="/services/consulting">Konsultasi IT dan Bisnis IT</a></li>
+              @foreach ($services as $service)  
+                <li><a href="{{ $service['url'] }}">{{ $service['name'] }}</a></li>
+              @endforeach
             </ul>
           </li>
           <li><a href="/#contact">Contact</a></li>
