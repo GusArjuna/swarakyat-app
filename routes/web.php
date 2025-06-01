@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(CompanyProfileController::class)->group(function () {
     Route::get('/', 'index');
-    Route::get('/team', 'team');
-    Route::get('/testimonials', 'testimonials');
-    Route::get('/contact', 'contact');
+    Route::get('/portofolio', 'portofolio');
+    Route::get('/portofolio-details/{portofolio}', 'portofolio_details');
+    Route::get('/services/{category}', 'service');
 });

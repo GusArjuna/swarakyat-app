@@ -67,7 +67,7 @@
                 <div class="icon">
                   <i class="bi bi-{{ $service['icon'] }}"></i>
                 </div>
-                <a href="{{ $service['url'] }}" class="stretched-link">
+                <a href="{{ $service['category'] }}" class="stretched-link">
                   <h3>{{ $service['name'] }}</h3>
                 </a>
                 <p>{{ $service['tagline'] }}</p>

@@ -35,7 +35,7 @@
           <li class="dropdown"><a href="#"><span>Layanan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               @foreach ($services as $service)  
-                <li><a href="{{ $service['url'] }}">{{ $service['name'] }}</a></li>
+                <li><a href="{{ $service['category'] }}">{{ $service['name'] }}</a></li>
               @endforeach
             </ul>
           </li>
@@ -82,6 +82,7 @@
   <script src="{{ url('company-profile/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
   <script src="{{ url('company-profile/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
   <script src="{{ url('company-profile/vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script> AOS.init(); </script>
   {{-- <script src="{{ url('company-profile/js/main.js') }}"></script> --}}
 
 </body>
