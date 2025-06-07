@@ -103,7 +103,9 @@
     }
     if ($('#dataTable2').length) {
         $('#dataTable2').DataTable({
-            responsive: true
+            responsive: false,
+            lengthMenu: [5, 10, 25, 50, 100], 
+            pageLength: 10,
         });
     }
     if ($('#dataTable3').length) {

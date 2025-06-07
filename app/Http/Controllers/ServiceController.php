@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
+use Illuminate\Validation\Rule;
 
 class ServiceController extends Controller
 {
@@ -13,18 +14,12 @@ class ServiceController extends Controller
      */
     public function index()
     {
+        $services = Service::all();
         return view('data.service.index',[
-            'title' => 'Layanan || Swarakyat Nusantara',
+            'title' => 'Services || Swarakyat Nusantara',
             'menu' => 'Services',
             'submenu' => 'Manage Services',
-            'services' =>[
-                [
-                    'name' => 'Pemasangan Wifi',
-                    'category' => 'services/1',
-                    'icon' => 'wifi',
-                    'tagline' => 'Koneksi cepat dan stabil untuk semua kebutuhan Anda.',
-                ],
-            ],
+            'services' => $services,
         ]);
     }
 
@@ -33,7 +28,15 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        $services = Service::all();
+        return view('data.service.add',[
+            'title' => 'Services || Swarakyat Nusantara',
+            'menu' => 'Services',
+            'submenu' => 'Manage Services',
+            'submenulink' => '/admdashboard/services',
+            'subsubmenu' => 'add',
+            'services' => $services,
+        ]);
     }
 
     /**
@@ -41,7 +44,17 @@ class ServiceController extends Controller
      */
     public function store(StoreServiceRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'icon' => 'required',
+            'tagline' => 'required',
+        ]);
+        
+        $service=Service::create($validatedData);
+        $service->update([
+            'url' => '/services/' . $service->id,
+        ]);
+        return redirect('/admdashboard/services')->with('success','Data Added');
     }
 
     /**
@@ -57,7 +70,16 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        $services = Service::all();
+        return view('data.service.add',[
+            'title' => 'Services || Swarakyat Nusantara',
+            'menu' => 'Services',
+            'submenu' => 'Manage Services',
+            'submenulink' => '/admdashboard/services',
+            'subsubmenu' => 'edit',
+            'services' => $services,
+            'service' => $service,
+        ]);
     }
 
     /**
@@ -65,7 +87,15 @@ class ServiceController extends Controller
      */
     public function update(UpdateServiceRequest $request, Service $service)
     {
-        //
+        $validatedData = $request->validate([
+            'url' => ['required',Rule::unique('services')->ignore($service->id)],
+            'name' => 'required',
+            'icon' => 'required',
+            'tagline' => 'required',
+        ]);
+        Service::where('id',$service->id)
+                    ->update($validatedData);
+        return redirect('/admdashboard/services')->with('success','Data Updated');
     }
 
     /**
@@ -73,6 +103,7 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        Service::destroy($service->id);
+        return redirect('/admdashboard/services')->with('danger','Data Deleted');
     }
 }

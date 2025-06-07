@@ -32,7 +32,7 @@
                                             <form action="/admdashboard/services/{{ $service->id }}" method="post" class="d-inline form-delete">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="button" class="btn btn-outline-danger mb-3 btn-delete" data-name="{{ $service->name }}">
+                                                <button type="button" class="btn btn-outline-danger mb-3 btn-delete" data-id="{{ $service->id }}">
                                                     <span class="ti-trash"></span>
                                                 </button>
                                             </form>
@@ -53,12 +53,12 @@
         $(document).ready(function() {
             $('.btn-delete').click(function(e) {
                 e.preventDefault(); 
-                const name = $(this).data('name');
+
                 const button = $(this);
                 const form = button.closest('.form-delete');
 
                 Swal.fire({
-                    title: `Are you sure you want to delete ${name}?`,
+                    title: 'Are you sure you want to delete this?',
                     text: "This action cannot be undone.",
                     icon: 'warning',
                     showCancelButton: true,

@@ -67,7 +67,7 @@
                 <div class="icon">
                   <i class="bi bi-{{ $service['icon'] }}"></i>
                 </div>
-                <a href="{{ $service['category'] }}" class="stretched-link">
+                <a href="{{ $service['url'] }}" class="stretched-link">
                   <h3>{{ $service['name'] }}</h3>
                 </a>
                 <p>{{ $service['tagline'] }}</p>
@@ -149,7 +149,7 @@
 
           @foreach ($mitras as $mitra)
             <div class="col-xl-3 col-md-4 client-logo">
-              <img src="{{ $mitra['url'] }}" class="img-fluid" alt="{{ $mitra['name'] }}">
+              <img src="{{ asset('storage/' . $mitra->url) }}" class="img-fluid" alt="{{ $mitra->name }}">
             </div>
           @endforeach
 

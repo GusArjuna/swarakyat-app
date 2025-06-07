@@ -49,7 +49,7 @@
                                 <ul class="collapse">
                                     <li><a href="/admdashboard/services">Manage Service</a></li>
                                     @foreach ($services as $service)
-                                        <li><a href="/admdashboard/{{ $service['category'] }}">{{ $service['name'] }}</a></li>
+                                        <li><a href="/admdashboard{{ $service->url; }}">{{ $service->name }}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -66,6 +66,13 @@
                                 </ul>
                             </li>
                             <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-gallery"></i><span>Portofolio</span></a>
+                                <ul class="collapse">
+                                    <li><a href="/admdashboard/portofolio-categories">categories</a></li>
+                                    <li><a href="/admdashboard/portofolio">Working Experience</a></li>
+                                </ul>
+                            </li>
+                            <li>
                                 <a href="/admdashboard/message"><i class="ti-comment-alt"></i><span>Message</span></a>
                             </li>
                         </ul>
@@ -76,41 +83,43 @@
         <div class="main-content">
             <div class="header-area">
                 <div class="row align-items-center">
-                    {{-- <div class="col-md-6 col-sm-8 clearfix">
+                    <div class="col-md-1 clearfix">
                         <div class="nav-btn pull-left">
                             <span></span>
                             <span></span>
                             <span></span>
                         </div>
-                        <div class="search-box pull-left">
+                        {{-- <div class="search-box pull-left">
                             <form action="#">
                                 <input type="text" name="search" placeholder="Search..." required>
                                 <i class="ti-search"></i>
                             </form>
+                        </div> --}}
+                    </div>
+                    <div class="col-sm-5 clearfix">
+                        <div class="breadcrumbs-area clearfix">
+                            <h4 class="page-title pull-left">{{ $menu }}</h4>
+                            @if (isset($subsubmenu))
+                                <ul class="breadcrumbs pull-left">
+                                    <li><a href="/admdashboard">Home</a></li>
+                                    <li><a href="{{ $submenulink }}">{{ $submenu }}</a></li>
+                                    <li><span>{{ $subsubmenu }}</span></li>
+                                </ul>
+                            @elseif (isset($submenu))  
+                                <ul class="breadcrumbs pull-left">
+                                    <li><a href="/admdashboard">Home</a></li>
+                                    <li><span>{{ $submenu }}</span></li>
+                                </ul>  
+                            @endif
                         </div>
-                    </div> --}}
-                    <div class="col-md-6 col-sm-4 clearfix">
+                    </div>
+                    <div class="col-md-3 col-sm-4 clearfix">
                         <ul class="notification-area pull-right">
                             <li id="full-view"><i class="ti-fullscreen"></i></li>
                             <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
                         </ul>
                     </div>
-                </div>
-            </div>
-            <div class="page-title-area">
-                <div class="row align-items-center">
-                    <div class="col-sm-6">
-                        <div class="breadcrumbs-area clearfix">
-                            <h4 class="page-title pull-left">{{ $menu }}</h4>
-                            @isset($submenu)
-                                <ul class="breadcrumbs pull-left">
-                                    <li><a href="/admdashboard">Home</a></li>
-                                    <li><span>{{ $submenu }}</span></li>
-                                </ul>
-                            @endisset
-                        </div>
-                    </div>
-                    <div class="col-sm-6 clearfix">
+                    <div class="col-sm-3 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="{{ asset('back/images/author/avatar.png') }}" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
@@ -151,12 +160,14 @@
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ url('/back/js/line-chart.js') }}"></script>
     <script src="{{ url('/back/js/pie-chart.js') }}"></script>
     <script src="{{ url('/back/js/bar-chart.js') }}"></script>
     <script src="{{ url('/back/js/maps.js') }}"></script>
     <script src="{{ url('/back/js/plugins.js') }}"></script>
     <script src="{{ url('/back/js/scripts.js') }}"></script>
+    @yield('script')
 </body>
 
 </html>

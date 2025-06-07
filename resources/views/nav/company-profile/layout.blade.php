@@ -35,7 +35,7 @@
           <li class="dropdown"><a href="#"><span>Layanan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               @foreach ($services as $service)  
-                <li><a href="{{ $service['category'] }}">{{ $service['name'] }}</a></li>
+                <li><a href="{{ $service['url'] }}">{{ $service['name'] }}</a></li>
               @endforeach
             </ul>
           </li>

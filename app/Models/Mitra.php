@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Mitra extends Model
 {
-    /** @use HasFactory<\Database\Factories\ServiceFactory> */
+    /** @use HasFactory<\Database\Factories\MitraFactory> */
     use HasFactory;
 
     protected $fillable=[
         'name',
         'url',
-        'icon',
-        'tagline',
+        'category',
+        'join',
     ];
 }
