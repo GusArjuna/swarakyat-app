@@ -7,18 +7,18 @@
                 <div class="card-body">
                     <h4 class="header-title">{{ $subsubmenu.' '.$menu}}</h4>
                     @if ($subsubmenu=='add')
-                        <form action="/admdashboard/mitra/add" method="post" enctype="multipart/form-data">
+                        <form action="/admdashboard/services-details/add" method="post" enctype="multipart/form-data">
                     @else
-                        <form action="/admdashboard/mitra/{{ $mitra->id }}" method="post" enctype="multipart/form-data">
+                        <form action="/admdashboard/services-details/{{ $serviceDetail->id }}" method="post" enctype="multipart/form-data">
                         @method('patch')    
                     @endif
                         @csrf
                         @php
-                            $defaultUrl = $mitra->url ?? ''; 
+                            $defaultUrl = $serviceDetail->url ?? ''; 
                             $defaultLabel = $defaultUrl ? basename($defaultUrl) : 'Upload Photo';
                         @endphp
-                        @if(isset($mitra))
-                            <input type="hidden" name="oldURL" value="{{ $mitra->url }}">
+                        @if(isset($serviceDetail))
+                            <input type="hidden" name="oldURL" value="{{ $serviceDetail->url }}">
                         @endif
                         <div class="custom-file">
                             <input class="custom-file-input"
@@ -40,8 +40,8 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-form-label">Name of Mitra</label>
-                            <input class="form-control" type="text" placeholder="Telkom" id="name" name="name" value="{{ old('name',$mitra->name ?? '') }}" autofocus required>
+                            <label for="name" class="col-form-label">Name of Service</label>
+                            <input class="form-control" type="text" placeholder="MiniQ" id="name" name="name" value="{{ old('name',$serviceDetail->name ?? '') }}" autofocus required>
                             @error('name')
                                 <div class="alert alert-danger" role="alert">
                                     <strong>Oh snap!</strong> {{ $message }}
@@ -49,18 +49,34 @@
                             @enderror
                         </div> 
                         <div class="form-group">
-                            <label for="category" class="col-form-label">Category</label>
-                            <input class="form-control" type="text" placeholder="Internet Service Provider" id="category" name="category"  value="{{ old('category',$mitra->category ?? '') }}" required>
-                            @error('category')
+                            <label for="service_id" class="col-form-label">Category</label>
+                            <select class="form-control"id="service_id" name="service_id"  required>
+                                <option>Select</option>
+                                @foreach ($services as $service)
+                                    <option value="{{ $service->id }}" @selected(isset($serviceDetail) && $serviceDetail->service_id==$service->id)>{{ $service->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('service_id')
                                 <div class="alert alert-danger" role="alert">
                                     <strong>Oh snap!</strong> {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="join" class="col-form-label">Join Date</label>
-                            <input class="form-control" type="date" id="join" name="join"  value="{{ old('join',$mitra->join ?? '') }}" required>
-                            @error('join')
+                            <label for="price" class="col-form-label">Price</label>
+                            <input class="form-control" type="number" id="price" name="price"  value="{{ old('price',$serviceDetail->price ?? '') }}" required>
+                            @error('price')
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Oh snap!</strong> {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Description</span>
+                            </div>
+                            <textarea class="form-control" aria-label="Description" placeholder="Layanan Bagus" id="description" name="description" required>{{ old('description',$serviceDetail->description ?? '') }}</textarea>
+                            @error('description')
                                 <div class="alert alert-danger" role="alert">
                                     <strong>Oh snap!</strong> {{ $message }}
                                 </div>

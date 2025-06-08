@@ -16,11 +16,9 @@ class MitraController extends Controller
     public function index()
     {  
         $mitras = Mitra::all();
-        $services = Service::all();
         return view('data.mitra.index',[
             'title' => 'Mitra || Swarakyat Nusantara',
             'menu' => 'Mitra',
-            'services' => $services,
             'mitras' => $mitras,
         ]);
     }
@@ -30,14 +28,12 @@ class MitraController extends Controller
      */
     public function create()
     {
-        $services = Service::all();
         return view('data.mitra.add',[
             'title' => 'Services || Swarakyat Nusantara',
             'menu' => 'Mitra',
             'submenu' => 'Manage Mitra',
             'submenulink' => '/admdashboard/mitra',
             'subsubmenu' => 'add',
-            'services' => $services,
         ]);
     }
 
@@ -73,14 +69,12 @@ class MitraController extends Controller
      */
     public function edit(Mitra $mitra)
     {
-        $services = Service::all();
         return view('data.mitra.add',[
             'title' => 'Mitra || Swarakyat Nusantara',
             'menu' => 'Mitra',
             'submenu' => 'Manage Mitra',
             'submenulink' => '/admdashboard/mitra',
             'subsubmenu' => 'edit',
-            'services' => $services,
             'mitra' => $mitra,
         ]);
     }

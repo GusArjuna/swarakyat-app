@@ -16,4 +16,8 @@ class Service extends Model
         'icon',
         'tagline',
     ];
+
+    public function serviceDetail(){
+        return $this->hasMany(serviceDetail::class);
+    }
 }

@@ -9,4 +9,17 @@ class Client extends Model
 {
     /** @use HasFactory<\Database\Factories\ClientFactory> */
     use HasFactory;
+    protected $fillable=[
+        'userID',
+        'companyName',
+        'companyCategory',
+        'url',
+        'weburl',
+        'address',
+        'district',
+        'city',
+        'province',
+        'state',
+        'join',
+    ];
 }

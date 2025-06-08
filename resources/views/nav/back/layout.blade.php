@@ -41,38 +41,36 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li class="active">
+                            <li class="{{ ($menu=='Dashboard')?'active':'' }}">
                                 <a href="/admdashboard"><i class="ti-dashboard"></i><span>dashboard</span></a>
                             </li>
-                            <li>
+                            <li class="{{ ($menu=='Services')?'active':'' }}">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i><span>Services</span></a>
                                 <ul class="collapse">
-                                    <li><a href="/admdashboard/services">Manage Service</a></li>
-                                    @foreach ($services as $service)
-                                        <li><a href="/admdashboard{{ $service->url; }}">{{ $service->name }}</a></li>
-                                    @endforeach
+                                    <li class="{{ isset($submenu)&&($submenu=='Manage Services')?'active':'' }}"><a href="/admdashboard/services">Manage Service</a></li>
+                                    <li class="{{ isset($submenu)&&($submenu=='Service Details')?'active':'' }}"><a href="/admdashboard/services-details">Service Details</a></li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="/admdashboard/client"><i class="ti-user"></i><span>Client</span></a>
+                            <li class="{{ ($menu=='Clients')?'active':'' }}">
+                                <a href="/admdashboard/clients"><i class="ti-user"></i><span>Client</span></a>
                             </li>
-                            <li>
+                            <li class="{{ ($menu=='Mitra')?'active':'' }}">
                                 <a href="/admdashboard/mitra"><i class="ti-hand-drag"></i><span>Mitra</span></a>
                             </li>
-                            <li>
+                            <li class="{{ ($menu=='API')?'active':'' }}">
                                 <a href="/admdashboard/api" aria-expanded="true"><i class="ti-plug"></i><span>API</span></a>
                                 <ul class="collapse">
                                     <li><a href="/admdashboard/api/miniq">MiniQ</a></li>
                                 </ul>
                             </li>
-                            <li>
+                            <li class="{{ ($menu=='Portofolio')?'active':'' }}">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-gallery"></i><span>Portofolio</span></a>
                                 <ul class="collapse">
                                     <li><a href="/admdashboard/portofolio-categories">categories</a></li>
                                     <li><a href="/admdashboard/portofolio">Working Experience</a></li>
                                 </ul>
                             </li>
-                            <li>
+                            <li class="{{ ($menu=='Message')?'active':'' }}">
                                 <a href="/admdashboard/message"><i class="ti-comment-alt"></i><span>Message</span></a>
                             </li>
                         </ul>

@@ -44,7 +44,7 @@
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200" style="text-align: justify">
             <p>Kami adalah penyedia layanan IT yang hadir untuk membantu bisnis dan UMKM berkembang melalui solusi digital yang terjangkau, efisien, dan berkualitas. Kami menawarkan berbagai layanan mulai dari pemasangan WiFi dan CCTV, maintenance serta instalasi kabel LAN dan fiber optik, hingga pengadaan sistem kasir dan solusi pembayaran modern. Tidak hanya itu, kami juga mengembangkan website, aplikasi mobile, dan software pendukung yang dirancang sesuai kebutuhan klien. Dengan dukungan tim yang berpengalaman di bidang teknologi dan bisnis, kami siap menjadi mitra strategis Anda dalam menghadapi tantangan digital. Kami percaya bahwa setiap bisnis, besar maupun kecil, berhak mendapatkan teknologi yang andal dengan harga yang ramah di kantong. Karena itu, kami berkomitmen untuk memberikan layanan profesional yang mempermudah operasional bisnis Anda, sambil terus mendukung pertumbuhan UMKM di era digital ini.</p>
-            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+            <a href="/portofolio" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
           </div>
 
         </div>

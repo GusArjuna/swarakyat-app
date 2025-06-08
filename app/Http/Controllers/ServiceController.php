@@ -28,14 +28,12 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $services = Service::all();
         return view('data.service.add',[
             'title' => 'Services || Swarakyat Nusantara',
             'menu' => 'Services',
             'submenu' => 'Manage Services',
             'submenulink' => '/admdashboard/services',
             'subsubmenu' => 'add',
-            'services' => $services,
         ]);
     }
 
@@ -70,14 +68,12 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        $services = Service::all();
         return view('data.service.add',[
             'title' => 'Services || Swarakyat Nusantara',
             'menu' => 'Services',
             'submenu' => 'Manage Services',
             'submenulink' => '/admdashboard/services',
             'subsubmenu' => 'edit',
-            'services' => $services,
             'service' => $service,
         ]);
     }

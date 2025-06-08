@@ -30,7 +30,7 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="/#home" class="active">Home</a></li>
-          <li><a href="#about">Tentang Kami</a></li>
+          <li><a href="/#about">Tentang Kami</a></li>
           <li><a href="/portofolio">Portfolio</a></li>
           <li class="dropdown"><a href="#"><span>Layanan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>

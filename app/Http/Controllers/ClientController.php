@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Models\Service;
+use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
 {
@@ -13,7 +15,12 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+        return view('data.client.index',[
+            'title' => 'Clients || Swarakyat Nusantara',
+            'menu' => 'Clients',
+            'clients' => $clients,
+        ]);
     }
 
     /**
@@ -21,7 +28,13 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('data.client.add',[
+            'title' => 'Clients || Swarakyat Nusantara',
+            'menu' => 'Client',
+            'submenu' => 'Manage Client',
+            'submenulink' => '/admdashboard/clients',
+            'subsubmenu' => 'add',
+        ]);
     }
 
     /**
@@ -29,7 +42,43 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'companyName' => 'required',
+            'url' => 'image|file',
+            'companyCategory' => 'required',
+            'weburl' => 'required',
+            'address' => 'required',
+            'district' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'state' => 'required',
+            'join' => 'required',
+        ]);
+
+        if($request->file('url')){
+            $validatedData['url'] = $request->file('url')->store('client');
+        }
+
+        $prefixMap = [
+            'Standalone'   => 'CLTSTL',
+            'Company'      => 'CLTCMP',
+            'Organization' => 'CLTORG',
+            'School'       => 'CLTSCH',
+            'UMKM'         => 'CLTUMK',
+        ];
+
+        $category = $request->companyCategory;
+
+        if (!array_key_exists($category, $prefixMap)) {
+            return redirect()->back()->with('danger', 'Wrong Category');
+        }
+
+        $client = Client::create($validatedData);
+        $client->update([
+            'userID' => $prefixMap[$category] . $client->id,
+        ]);
+        
+        return redirect('/admdashboard/clients')->with('success','Data Added');
     }
 
     /**
@@ -45,7 +94,14 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('data.client.add',[
+            'title' => 'Clients || Swarakyat Nusantara',
+            'menu' => 'Client',
+            'submenu' => 'Manage Client',
+            'submenulink' => '/admdashboard/clients',
+            'subsubmenu' => 'edit',
+            'client' => $client,
+        ]);
     }
 
     /**
@@ -53,7 +109,43 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+         $validatedData = $request->validate([
+            'companyName' => 'required',
+            'url' => 'image|file',
+            'companyCategory' => 'required',
+            'weburl' => 'required',
+            'address' => 'required',
+            'district' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'state' => 'required',
+            'join' => 'required',
+        ]);
+        if ($request->userID!=$client->userID) {
+            $prefixMap = [
+                'Standalone'   => 'CLTSTL',
+                'Company'      => 'CLTCMP',
+                'Organization' => 'CLTORG',
+                'School'       => 'CLTSCH',
+                'UMKM'         => 'CLTUMK',
+            ];
+
+            $category = $request->companyCategory;
+
+            if (!array_key_exists($category, $prefixMap)) {
+                return redirect()->back()->with('danger', 'Wrong Category');
+            }
+            $validatedData['userID'] = $prefixMap[$category] . $client->id;
+        }
+        if ($request->hasFile('url')) {
+            Storage::delete($request->oldURL);
+            $validatedData['url'] = $request->file('url')->store('client', 'public');
+        } else {
+            $validatedData['url'] = $request->oldURL;
+        }
+        Client::where('id',$client->id)
+                    ->update($validatedData);
+        return redirect('/admdashboard/clients')->with('success','Data Updated');
     }
 
     /**
@@ -61,6 +153,8 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        Storage::delete($client->url);
+        Client::destroy($client->id);
+        return redirect('/admdashboard/clients')->with('danger','Data Deleted');
     }
 }
