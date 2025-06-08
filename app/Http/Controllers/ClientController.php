@@ -57,6 +57,8 @@ class ClientController extends Controller
 
         if($request->file('url')){
             $validatedData['url'] = $request->file('url')->store('client');
+        }else{
+            $validatedData['url'] = 'client/standalone.png';
         }
 
         $prefixMap = [
@@ -137,7 +139,9 @@ class ClientController extends Controller
             }
             $validatedData['userID'] = $prefixMap[$category] . $client->id;
         }
-        if ($request->hasFile('url')) {
+        if($request->hasFile('url') && $request->oldURL=='client/standalone.png'){
+            $validatedData['url'] = $request->file('url')->store('client', 'public');
+        } else if ($request->hasFile('url')) {
             Storage::delete($request->oldURL);
             $validatedData['url'] = $request->file('url')->store('client', 'public');
         } else {
@@ -153,7 +157,9 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        Storage::delete($client->url);
+        if($client->url!='client/standalone.png'){
+            Storage::delete($client->url);
+        }
         Client::destroy($client->id);
         return redirect('/admdashboard/clients')->with('danger','Data Deleted');
     }

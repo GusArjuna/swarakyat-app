@@ -16,4 +16,8 @@ class Mitra extends Model
         'category',
         'join',
     ];
+
+    public function portofolio(){
+        return $this->hasMany(portofolio::class);
+    }
 }

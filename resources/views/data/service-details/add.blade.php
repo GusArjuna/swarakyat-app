@@ -5,7 +5,7 @@
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">{{ $subsubmenu.' '.$menu}}</h4>
+                    <h4 class="header-title">{{ $subsubmenu.' '.$submenu}}</h4>
                     @if ($subsubmenu=='add')
                         <form action="/admdashboard/services-details/add" method="post" enctype="multipart/form-data">
                     @else

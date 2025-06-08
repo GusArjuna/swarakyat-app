@@ -70,12 +70,3 @@ Route::controller(PortofolioController::class)->group(function () {
     Route::patch('/admdashboard/portofolio/{portofolio}', 'update');
     Route::delete('/admdashboard/portofolio/{portofolio}', 'destroy');
 });
-
-Route::controller(PortofolioCategoryController::class)->group(function () {
-    Route::get('/admdashboard/portofolio-categories', 'index');
-    Route::get('/admdashboard/portofolio-categories/add', 'create');
-    Route::post('/admdashboard/portofolio-categories/add', 'store');
-    Route::get('/admdashboard/portofolio-categories/{portofolioCategory}/edit', 'edit');
-    Route::patch('/admdashboard/portofolio-categories/{portofolioCategory}', 'update');
-    Route::delete('/admdashboard/portofolio-categories/{portofolioCategory}', 'destroy');
-});

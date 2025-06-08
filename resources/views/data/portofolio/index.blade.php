@@ -6,33 +6,37 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="header-title mb-0">Services List</h4>
-                        <a class="btn btn-rounded btn-primary" href="/admdashboard/services/add" role="button"><span class="ti-plus"></span></a>
+                        <h4 class="header-title mb-0">Portofolio List</h4>
+                        <a class="btn btn-rounded btn-primary" href="/admdashboard/portofolio/add" role="button"><span class="ti-plus"></span></a>
                     </div>
                     <div class="data-tables datatable-primary">
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
                                 <tr>
+                                    <th>Photo</th>
                                     <th>Name</th>
-                                    <th>URL</th>
-                                    <th>Icon</th>
-                                    <th>Tagline</th>
+                                    <th>Category</th>
+                                    <th>Client</th>
+                                    <th>Mitra</th>
+                                    <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($services as $service)
+                                @foreach ($portofolios as $portofolio)
                                     <tr>
-                                        <td>{{ $service->name }}</td>
-                                        <td>{{ $service->url }}</td>
-                                        <td>{{ $service->icon }}</td>
-                                        <td>{{ $service->tagline }}</td>
+                                        <td><img src="{{ asset('storage/' . $portofolio->url) }}" class="img-fluid" alt="{{ $portofolio->name }}" style="max-height: 100px;"></td>
+                                        <td>{{ $portofolio->name }}</td>
+                                        <td>{{ $portofolio->serviceDetail->name }}</td>
+                                        <td>{{ $portofolio->client->companyName }}</td>
+                                        <td>{{ $portofolio->mitra->name }}</td>
+                                        <td>{{ $portofolio->description }}</td>
                                         <td>
-                                            <a href="/admdashboard/services/{{ $service->id }}/edit"><span class="btn btn-outline-warning mb-3"><span class="ti-pencil"></span></span></a>
-                                            <form action="/admdashboard/services/{{ $service->id }}" method="post" class="d-inline form-delete">
+                                            <a href="/admdashboard/portofolio/{{ $portofolio->id }}/edit"><span class="btn btn-outline-warning mb-3"><span class="ti-pencil"></span></span></a>
+                                            <form action="/admdashboard/portofolio/{{ $portofolio->id }}" method="post" class="d-inline form-delete">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="button" class="btn btn-outline-danger mb-3 btn-delete" data-id="{{ $service->id }}">
+                                                <button type="button" class="btn btn-outline-danger mb-3 btn-delete" data-id="{{ $portofolio->id }}">
                                                     <span class="ti-trash"></span>
                                                 </button>
                                             </form>

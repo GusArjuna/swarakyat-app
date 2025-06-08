@@ -49,6 +49,7 @@
                                 <ul class="collapse">
                                     <li class="{{ isset($submenu)&&($submenu=='Manage Services')?'active':'' }}"><a href="/admdashboard/services">Manage Service</a></li>
                                     <li class="{{ isset($submenu)&&($submenu=='Service Details')?'active':'' }}"><a href="/admdashboard/services-details">Service Details</a></li>
+                                    <li class="{{ isset($submenu)&&($submenu=='Portofolio')?'active':'' }}"><a href="/admdashboard/portofolio">Portofolio</a></li>
                                 </ul>
                             </li>
                             <li class="{{ ($menu=='Clients')?'active':'' }}">
@@ -61,13 +62,6 @@
                                 <a href="/admdashboard/api" aria-expanded="true"><i class="ti-plug"></i><span>API</span></a>
                                 <ul class="collapse">
                                     <li><a href="/admdashboard/api/miniq">MiniQ</a></li>
-                                </ul>
-                            </li>
-                            <li class="{{ ($menu=='Portofolio')?'active':'' }}">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-gallery"></i><span>Portofolio</span></a>
-                                <ul class="collapse">
-                                    <li><a href="/admdashboard/portofolio-categories">categories</a></li>
-                                    <li><a href="/admdashboard/portofolio">Working Experience</a></li>
                                 </ul>
                             </li>
                             <li class="{{ ($menu=='Message')?'active':'' }}">

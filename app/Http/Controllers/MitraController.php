@@ -50,6 +50,8 @@ class MitraController extends Controller
         ]);
         if($request->file('url')){
             $validatedData['url'] = $request->file('url')->store('mitra');
+        }else{
+            $validatedData['url'] = 'mitra/standalone.png';
         }
         
         Mitra::create($validatedData);
@@ -90,12 +92,15 @@ class MitraController extends Controller
             'join' => 'required',
             'category' => 'required',
         ]);
-        if ($request->hasFile('url')) {
+        if($request->hasFile('url') && $request->oldURL=='mitra/standalone.png'){
+            $validatedData['url'] = $request->file('url')->store('mitra', 'public');
+        } else if ($request->hasFile('url')) {
             Storage::delete($request->oldURL);
             $validatedData['url'] = $request->file('url')->store('mitra', 'public');
         } else {
             $validatedData['url'] = $request->oldURL;
         }
+
         Mitra::where('id',$mitra->id)
                     ->update($validatedData);
         return redirect('/admdashboard/mitra')->with('success','Data Updated');
@@ -106,8 +111,11 @@ class MitraController extends Controller
      */
     public function destroy(Mitra $mitra)
     {
-        Storage::delete($mitra->url);
+        if($mitra->url!='mitra/standalone.png'){
+            Storage::delete($mitra->url);
+        }
         Mitra::destroy($mitra->id);
+                
         return redirect('/admdashboard/mitra')->with('danger','Data Deleted');
     }
 }

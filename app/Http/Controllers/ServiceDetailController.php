@@ -54,6 +54,8 @@ class ServiceDetailController extends Controller
         ]);
         if($request->file('url')){
             $validatedData['url'] = $request->file('url')->store('service_details');
+        }else{
+            $validatedData['url'] = 'service_details/standalone.png';
         }
         
         ServiceDetail::create($validatedData);
@@ -97,12 +99,15 @@ class ServiceDetailController extends Controller
             'price' => 'required',
             'description' => 'required',
         ]);
-        if ($request->hasFile('url')) {
+        if($request->hasFile('url') && $request->oldURL=='service_details/standalone.png'){
+            $validatedData['url'] = $request->file('url')->store('service_details', 'public');
+        } else if ($request->hasFile('url')) {
             Storage::delete($request->oldURL);
             $validatedData['url'] = $request->file('url')->store('service_details', 'public');
         } else {
             $validatedData['url'] = $request->oldURL;
         }
+
         ServiceDetail::where('id',$serviceDetail->id)
                     ->update($validatedData);
         return redirect('/admdashboard/services-details')->with('success','Data Updated');
@@ -113,7 +118,9 @@ class ServiceDetailController extends Controller
      */
     public function destroy(ServiceDetail $serviceDetail)
     {
-        Storage::delete($serviceDetail->url);
+        if($serviceDetail->url!='service_details/standalone.png'){
+            Storage::delete($serviceDetail->url);
+        }
         ServiceDetail::destroy($serviceDetail->id);
         return redirect('/admdashboard/services-details')->with('danger','Data Deleted');
     }

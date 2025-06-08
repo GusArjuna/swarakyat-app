@@ -22,4 +22,8 @@ class Client extends Model
         'state',
         'join',
     ];
+
+    public function portofolio(){
+        return $this->hasMany(portofolio::class);
+    }
 }

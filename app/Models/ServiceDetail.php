@@ -21,4 +21,8 @@ class ServiceDetail extends Model
     public function service(){
         return $this->belongsTo(service::class);
     }
+
+    public function portofolio(){
+        return $this->hasMany(portofolio::class);
+    }
 }
